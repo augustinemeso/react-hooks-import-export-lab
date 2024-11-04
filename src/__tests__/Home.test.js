@@ -1,11 +1,13 @@
-import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
-import Home from "../components/Home";
+// src/__tests__/Home.test.js
+import React from 'react';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Home from '../components/Home';
 
-test("it is exported as a default export", () => {
-  try {
-    expect(() => render(<Home />)).not.toThrow();
-  } catch (e) {
-    throw new Error("Make sure to export this component!");
-  }
+describe('<Home />', () => {
+  test('renders username and city', () => {
+    const { getByText } = render(<Home />);
+    expect(getByText(/Welcome, Augustine Meso!/i)).toBeInTheDocument(); // Ensure this matches exactly
+    expect(getByText(/Location: Nairobi, Kenya/i)).toBeInTheDocument(); // Ensure this matches exactly
+  });
 });

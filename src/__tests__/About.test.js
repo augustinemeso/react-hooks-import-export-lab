@@ -1,11 +1,12 @@
-import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
-import About from "../components/About";
+// src/__tests__/About.test.js
+import React from 'react';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Ensure this import for jest-dom matchers
+import About from '../components/About';
 
-test("it is exported as a default export", () => {
-  try {
-    expect(() => render(<About />)).not.toThrow();
-  } catch (e) {
-    throw new Error("Make sure to export this component!");
-  }
+describe('<About />', () => {
+  test('renders an image', () => {
+    const { getByAltText } = render(<About />);
+    expect(getByAltText(/profile/i)).toBeInTheDocument(); // Ensure alt text is "Profile"
+  });
 });
